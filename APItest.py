@@ -3,30 +3,19 @@ import json
 import os
 
 url = 'http://api.weatherapi.com/v1/current.json'
-api_key = 'fa7c0abb05f54f38a2832828212206'
+api_key = #WeatherAPI API-key goes here
 
+#dictionary to hold parameters for the search specification
 params = {
     'key': api_key
 }
 
-#response = requests.get(url, params=params)
-#res = response.json()
-
-#print(response.url)
-#print(response.status_code,'\n')
-#res = response.json()
-#print(json.dumps(res, indent=4, sort_keys=True))
-
-'''res = response.json()
-print(res,'\n')
-x = res['location']
-y = x['country']
-print(y)'''
-
+#shows the initial menu prompt to open app or exit it
 def ShowMenu():
     os.system('cls')
     print('1. Get Weather\n2. Exit\n')
 
+    #error checking to make sure they enter a valid int choice
     while True:
         try:
             inp = int(input('Selection: '))
@@ -44,9 +33,12 @@ def ShowMenu():
         os.system('cls')
         exit()
 
+#prompts them for if they want to get weather for current location, via IP, or search a city name
 def promptWeather():
     os.system('cls')
     print('1. Get weather for current location?\n2. Search city?\n3. Exit\n')
+    
+    #Error checking for valid input
     while True:
         try:
             inp = int(input('Selection:'))
@@ -59,10 +51,13 @@ def promptWeather():
         except ValueError:
             print('ERROR: Invalid type\n')
 
+    #setting parameters for what city to pull data from
     if inp == 1:
+        #search based on IP
         params['q'] = 'auto:ip'
     elif inp == 2:
         os.system('cls')
+        #get city name and set that to search parameter
         while True:
             City = input('City: ')
             if isinstance(City, str):
@@ -76,16 +71,20 @@ def promptWeather():
 
     showWeather()
 
+#display the weather based on search conditions
 def showWeather():
     os.system('cls')
     print('Getting weather...')
+    
+    #grabbing the JSON information from WeatherAPI
     response = requests.get(url, params=params)
     res = response.json()
     os.system('cls')
 
+    #storing information into variables
     current = res['current']
     location = res['location']
-
+    
     city = location['name']
     country = location['country']
     feelsTempF = current['feelslike_f']
@@ -93,6 +92,7 @@ def showWeather():
     windmph = current['wind_mph']
     humidity = current['humidity']
 
+    #print information to console
     print('Location: ', city, '\nCountry: ', country)
     print('Temperature: ', tempf, '°F')
     print('Feels like', feelsTempF, '°F')
@@ -100,6 +100,7 @@ def showWeather():
     print('Humidity: ', humidity, '%\n\n')
 
 
+    #prompt to search another city or to exit
     print('---------------------------------------------\n')
     print('1. Get weather for a new location?\n2. Exit\n')
     while True:
@@ -119,5 +120,5 @@ def showWeather():
         os.system('cls')
         exit()
 
-
+#start prog
 ShowMenu()
