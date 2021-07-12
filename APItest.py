@@ -3,11 +3,14 @@ import json
 import os
 
 url = 'http://api.weatherapi.com/v1/current.json'
-api_key = #WeatherAPI API-key goes here
+
+with open("config.json") as json_data_file:
+    data = json.load(json_data_file)
+    API_KEY = data['config']['API_KEY']
 
 #dictionary to hold parameters for the search specification
 params = {
-    'key': api_key
+    'key': API_KEY,
 }
 
 #shows the initial menu prompt to open app or exit it
