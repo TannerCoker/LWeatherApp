@@ -21,8 +21,13 @@ def getLocation():
     IPcheck = Checkbutton(frame, text='Get weather via IP', variable=UseIP, onvalue='True',offvalue='False', font=('Helvetica',12))
     
     cityLbl = Label(frame, text='City:', fg='black', font=('Helvetica',12))
+    cityEntry = Entry(frame)
+
+
     IPcheck.place(x=50,y=50)
     cityLbl.place(x=50,y=100)
+    cityEntry.place(x=100,y=102)
+    
 
 def checkInput():
     pass
@@ -34,7 +39,10 @@ root = Tk()
 root.title('LWeatherApp')
 #lwa = LWeatherApp(root)
 root.geometry('400x500')
+root.attributes('-alpha', 1)
+
 frame = Frame(root)
+frame.configure(bg='gray')
 frame.pack(side="top",expand=True,fill='both')
 getLocation()
 root.mainloop()
