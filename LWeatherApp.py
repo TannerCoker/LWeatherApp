@@ -7,30 +7,34 @@ from tkinter import *
 url = 'http://api.weatherapi.com/v1/current.json'
 
 #retrieve the API_KEY from config file
-with open("config.json") as json_data_file:
+'''with open("config.json") as json_data_file:
     data = json.load(json_data_file)
-    API_KEY = data['config']['API_KEY']
+    API_KEY = data['config']['API_KEY']'''
+
+
 
 #dictionary to hold parameters for the search specification
-params = {
+'''params = {
     'key': API_KEY,
-}
+}'''
 
+bgColor = 'royal blue'
+letColor = 'mint cream'
 
 def getLocation():
     UseIP = StringVar()
     cityName = StringVar()
     days = StringVar()
 
-    IPcheck = Checkbutton(frame, text='Get weather via IP',fg='lime',bg='black', variable=UseIP, onvalue='True',offvalue='False', font=('Helvetica',12))
-    
-    cityLbl = Label(frame, text='City:', fg='lime', bg='black', font=('Helvetica',12))
+    IPcheck = Checkbutton(frame, text='Get weather via IP',fg=letColor,bg=bgColor, variable=UseIP, onvalue='True',offvalue='False', font=('Helvetica',12,'bold'))
+
+    cityLbl = Label(frame, text='City:', fg=letColor, bg=bgColor, font=('Helvetica',12,'bold'))
     cityEntry = Entry(frame)
 
-    dayLbl = Label(frame, text='Days:', fg='lime' ,bg='black', font=('Helvetica',12))
+    dayLbl = Label(frame, text='Days:', fg=letColor ,bg=bgColor, font=('Helvetica',12,'bold'))
     dayEntry = Entry(frame)
 
-    submitBtn = Button(frame, text='Submit',fg='lime',bg='black',padx=10,command=checkInput('blach',2))
+    submitBtn = Button(frame, text='Submit',fg=letColor,bg=bgColor,padx=10,command=checkInput('blach',2))
 
 
     IPcheck.place(x=50,y=50)
@@ -39,7 +43,7 @@ def getLocation():
     dayLbl.place(x=50,y=150)
     dayEntry.place(x=100,y=152)
     submitBtn.place(relx=.5,rely=.5,anchor=CENTER)
-    
+
 
 def checkInput(city,day=1):
     print(city, ' ', day)
@@ -54,7 +58,7 @@ root.geometry('400x500')
 root.attributes('-alpha', 1)
 
 frame = Frame(root)
-frame.configure(bg='black')
+frame.configure(bg=bgColor)
 frame.pack(side="top",expand=True,fill='both')
 getLocation()
 root.mainloop()
